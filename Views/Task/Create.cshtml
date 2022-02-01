@@ -1,0 +1,188 @@
+﻿@model PanOpticon.Models.TaskViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container bg-secondary text-white rounded-3">
+
+
+    <h1 class="p-3 m-3" style="font-family:'Code Pro'"><i class="fal fa-plus-circle"></i> New Task</h1>
+
+    <hr />
+
+    <form asp-action="Create">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        @* name *@
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="input-group mb-1 mt-1 ms-1 me-1">
+
+                    <label asp-for="Task.TaskName" class="input-group-text"></label>
+                    <input asp-for="Task.TaskName" class="form-control" />
+
+                </div>
+            </div>
+        </div>
+
+        @* desc *@
+
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="input-group mb-1 mt-1 ms-1 me-1">
+
+                    <label asp-for="Task.TaskDescription" class="input-group-text"></label>
+                    <input asp-for="Task.TaskDescription" class="form-control" />
+
+                </div>
+            </div>
+        </div>
+
+        @* priori *@
+
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="input-group mb-1 mt-1 ms-1 me-1">
+
+                    <label asp-for="Task.TaskPriority" class="input-group-text "></label>
+                    <select asp-for="Task.TaskPriority" asp-items="@Html.GetEnumSelectList<TaskPriority>()" class="form-control"></select>
+
+                </div>
+            </div>
+        </div>
+
+        @*  Due Date *@
+
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="input-group mb-1 mt-1 ms-1 me-1">
+
+                    <label asp-for="Task.DueDate" class="input-group-text"></label>
+                    <input asp-for="Task.DueDate" class="form-control" />
+
+                </div>
+            </div>
+        </div>
+        @*  buttons *@
+        <div class="row justify-content-center">
+            <div class="col-5 justify-content-start p-3 ">
+
+                <div class="form-group form-switch">
+                    <input class="form-check-input" type="checkbox" asp-for="TaskNotificationSchedule.None" />
+                    <label class="form-check-label">@Html.DisplayNameFor(model => model.TaskNotificationSchedule.None)</label>
+                </div>
+
+
+
+                <div class="form-group form-switch">
+                    <input class="form-check-input" asp-for="TaskNotificationSchedule.OneDay" />
+                    <label class="form-check-label">@Html.DisplayNameFor(model => model.TaskNotificationSchedule.OneDay)</label>
+                </div>
+
+                <div class="form-group form-switch">
+                    <input class="form-check-input" asp-for="TaskNotificationSchedule.FiveHours" />
+                    <label class="form-check-label">@Html.DisplayNameFor(model => model.TaskNotificationSchedule.FiveHours)</label>
+                </div>
+
+
+                <div class="form-group form-switch">
+                    <input class="form-check-input" asp-for="TaskNotificationSchedule.HourBefore" />
+                    <label class="form-check-label">@Html.DisplayNameFor(model => model.TaskNotificationSchedule.HourBefore)</label>
+                </div>
+
+
+                <div class="form-group form-switch">
+                    <input class="form-check-input" asp-for="TaskNotificationSchedule.Thirty" />
+                    <label class="form-check-label">@Html.DisplayNameFor(model => model.TaskNotificationSchedule.Thirty)</label>
+                </div>
+
+
+                <div class="form-group form-switch">
+                    <input class="form-check-input" asp-for="TaskNotificationSchedule.Fifteen" />
+                    <label class="form-check-label">@Html.DisplayNameFor(model => model.TaskNotificationSchedule.Fifteen)</label>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <br />
+            <input type="submit" value="Create" class="btn btn-success" />
+            <a asp-action="Index" class="btn btn-warning">Back to List</a>
+        </div>
+
+
+
+    </form>
+
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+@*<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Task.TaskName" class="control-label"></label>
+            <input asp-for="Task.TaskName" class="form-control" />
+            <span asp-validation-for="Task.TaskName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Task.TaskDescription" class="control-label"></label>
+            <input asp-for="Task.TaskDescription" class="form-control" />
+            <span asp-validation-for="Task.TaskDescription" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Task.TaskPriority" class="control-label"></label>
+            <select asp-for="Task.TaskPriority" asp-items="@Html.GetEnumSelectList<TaskPriority>()" class="form-control"></select>
+            <span asp-validation-for="Task.TaskPriority" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Task.DueDate" class="control-label"></label>
+            <input asp-for="Task.DueDate" class="form-control" />
+            <span asp-validation-for="Task.DueDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-4 bg-info">
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="TaskNotificationSchedule.None" /> @Html.DisplayNameFor(model => model.TaskNotificationSchedule.None)
+            </label>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="TaskNotificationSchedule.HourBefore" /> @Html.DisplayNameFor(model => model.TaskNotificationSchedule.HourBefore)
+            </label>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="TaskNotificationSchedule.Thirty" /> @Html.DisplayNameFor(model => model.TaskNotificationSchedule.Thirty)
+            </label>
+        </div>
+
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="TaskNotificationSchedule.Fifteen" /> @Html.DisplayNameFor(model => model.TaskNotificationSchedule.Fifteen)
+            </label>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="TaskNotificationSchedule.FiveHours" /> @Html.DisplayNameFor(model => model.TaskNotificationSchedule.FiveHours)
+            </label>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="TaskNotificationSchedule.OneDay" /> @Html.DisplayNameFor(model => model.TaskNotificationSchedule.OneDay)
+            </label>
+        </div>
+    </div>
+
+
+   
+</div>*@

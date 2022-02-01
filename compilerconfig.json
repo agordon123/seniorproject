@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/style/bootstrap/scss/bootstrap.custom.css",
+    "inputFile": "wwwroot/style/bootstrap/scss/bootstrap.custom.scss"
+  },
+  {
+    "outputFile": "wwwroot/style/bootstrap/scss/bootstrap.css",
+    "inputFile": "wwwroot/style/bootstrap/scss/bootstrap.scss"
+  }
+]

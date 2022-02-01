@@ -1,0 +1,116 @@
+﻿@model IEnumerable<PanOpticon.Models.TaskViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+@*<div class="container bg-light">
+    <div class="row p-1 justify-content-center">
+        @foreach (var m in Model)
+        {
+        <div class="card p-0 mt-2 mb-2" style="width:25%">
+            <div class="card-header bg-secondary">
+                <h6 class="font-weight-bold text-white">@m.Task.TaskName</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> <span class="badge px-2 py-1 @m.Task.TaskPriority.GetPriorityBadge()" id="priority">@m.Task.TaskPriority.ToString()</span></li>
+                    <li class="list-group-item" maxlength="10">@m.Task.TaskDescription</li>
+
+                </ul>
+                <div class="row">
+                    @foreach (var p in m.TaskNotificationSchedule.GetType().GetProperties().Where(s => s.PropertyType == typeof(bool)))
+                    {
+                    <div class="col-6">
+                        <div class="form-check">
+                            <input class="form-check-input text-black opacity-100" style="opacity:0.8 !important;" type="checkbox" value="" id="flexCheckDisabled" disabled @{ 
+                                if ((bool)p.GetValue(m.TaskNotificationSchedule) == true) 
+                                { @:checked ="checked" 
+                                   } 
+                                } >
+                            <label class="form-check-label text-black opacity-100" style="opacity:0.8 !important;" for="flexCheckDisabled">
+                                @p.Name
+                            </label>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <br class=""/>
+                <a  asp-action="Edit" asp-route-id="@m.Task.Id" class="btn btn-success">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@m.Task.Id">Delete</a>
+            </div>
+
+
+        </div>
+        }
+    </div>
+</div>*@
+
+
+<div class="container bg-secondary text-white">
+    <div class="row justify-content-center">
+        <div class="col-lg-11 col-xl-10 p-1">
+            <ul class="nav nav-tabs nav-fill" role="tablist">
+                <li class="nav-item"><a class="nav-link active link-light" data-toggle="tab" href="#tasks">Tasks</a></li>
+                 <li class="nav-item"><a class="nav-link active link-light" data-toggle="tab" asp-action="Metrics">Metrics</a></li>
+              @*  <li class="nav-item"><a class="nav-link link-light" data-toggle="tab" href="#files">Files</a></li>
+                <li class="nav-item"><a class="nav-link link-light" data-toggle="tab" href="">Notes</a></li>
+                <li class="nav-item"><a class="nav-link link-light" data-toggle="tab" href="">OK</a></li>*@
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade active show" id="tasks" role="tabpanel">
+                    <div class="row p-2">
+                        <div class="col-auto d-flex">
+                            <h3 >Tasks</h3>
+                            <a asp-action="Create" class="btn rounded-circle bg-primary ms-2"><i class="fas fa-plus d-inline-block text-white"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* start of containers *@
+            @foreach (TaskPriority x in ((TaskPriority[])Enum.GetValues(typeof(TaskPriority))).OrderByDescending(o => o))
+            {
+            <div class="container"> 
+                <div class="card-list bg-darker-white">
+                    <div class="card-list-head">
+                        <h6 class="text-black fw-bold" style="padding-left: 10px"> @(x.GetDisplayName().Name ?? x.ToString() ) </h6>
+                    </div>
+                    @* each task goes here *@
+                    @foreach (var m in Model.Where(z=>z.Task.TaskPriority == x).OrderBy(z=>z.Task.DueDate))
+                    {
+                <div class="card mt-3 mb-3 shadow-lg">
+                    <div class="progress @x.GetPriorityBadge()"></div>
+                    <div class="card-body text-black d-flex flex-row">
+                        <div class="card-title d-flex flex-column">
+                            <a class="d-flex link-black">
+                                <h6 style="font-family:'Code Pro'">@m.Task.TaskName</h6>
+
+                            </a>
+                            <span class="small d-flex me-auto flex-column text-secondary">@( ( ( (m.Task.DueDate - DateTime.Now).Days) > 1 ? ((m.Task.DueDate- DateTime.Now  ).Days).ToString() + " days" : "Today" ))</span>
+                            <p class="small align-self-start text-start">@m.Task.TaskDescription</p>
+                        </div>
+                        <div class="d-flex flex-column ms-auto">
+                            <a asp-action="Edit" asp-route-id="@m.Task.Id" class="btn btn-info mt-1 mb-1"><i class="far fa-edit"></i></a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@m.Task.Id"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                    <form style="padding-bottom: 10px" asp-action="Complete" asp-route-id="@m.Task.Id">
+                        <input type="hidden" asp-for="@m.Task.Id" />
+                        <input type="submit" value="Complete" class="btn btn-danger" />
+                    </form>
+                </div>
+                    }
+                    @* end task *@
+                </div>
+            </div>
+            }
+            @* end of containers *@
+
+        </div>
+    </div> 
+</div>

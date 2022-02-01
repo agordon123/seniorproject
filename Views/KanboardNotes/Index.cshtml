@@ -1,0 +1,76 @@
+﻿@model IEnumerable<PanOpticon.Models.KanboardNote>
+
+@{ ViewData["Title"] = "Index"; }
+
+<h1>Notes</h1>
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <td>
+                <a asp-action="Create">Create New</a>
+            </td>
+            <td></td>
+            <td>
+                <a asp-action="Search">Search</a>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Note)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+
+
+<!-- display the title of the page -->
+
+<!-- display each KanboardNote in a bootstrap card using rows and columns with buttons to edit, delete, and details. -->
+
+    @foreach (var item in Model)
+    {
+<div class="card">
+    <div class="card-header">
+        @Html.DisplayFor(modelItem => item.Title)
+    </div>
+    <div class="card-body">
+        @Html.DisplayFor(modelItem => item.Note)
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </div>
+</div>
+}
+
+
+
+
+*@
+
+
+

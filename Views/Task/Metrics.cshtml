@@ -1,0 +1,136 @@
+
+@using Microsoft.AspNetCore.Identity
+@using PanOpticon.UserRoles
+@inject SignInManager<PanopticonUser> SignInManager
+
+@model PanOpticon.Models.MetricsViewModel
+
+@{ ViewData["Title"] = "Metrics"; }
+
+<div class="container bg-secondary text-white ">
+
+    <div class="row ">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tasks" role="tabpanel">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <div class="row">
+                        <div class="col-lg-6 d-flex">
+
+                            <div class='col-md-8'>
+                                <div class="card homeTaskCard  mt-2 mb-5" style="width:90%">
+                                    <div class="card-header" style="background-color: #29B9C2 "><h6 class="font-weight-bold text-black">Total tasks</h6></div>
+
+                                    <div class="card-body text-dark">
+                                        <div class="align-items-center justify-content-between d-flex">
+                                            <h5 class="text-success">@Model.TotalTasksCount <span style="color:black">tasks</span></h5>
+                                            <i class="far fa-rocket fa-2x display-4"></i>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class='col-md-8'>
+                                <div class="card homeTaskCard mt-2 mb-10" style="width: 90%">
+                                    <div class="card-header" style="background-color: #29B9C2"><h6 class="font-weight-bold text-black">Completed tasks</h6></div>
+                                    <div class="card-body text-dark">
+                                        <div class="align-items-center justify-content-between d-flex">
+                                            <h5 class="text-warning">@Model.CompletedTasksCount <span style="color:black">tasks</span></h5>
+                                            <i class="fas fa-badge-check fa-2x display-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class='col-md-8'>
+                                <div class="card homeTaskCard mt-2 mb-10" style="width: 90%;">
+                                    <div class="card-header" style="background-color: #29B9C2; "><h6 class="font-weight-bold text-black">Completion Rate</h6></div>
+                                    <div class="card-body text-dark">
+                                        <div class="align-items-center justify-content-between d-flex">
+                                            <h5 class=" " style="color:darkturquoise">@Model.CompletedTasksPercentage <span style="color:black">%</span> </h5>
+                                            <i class="fal fa-chart-line fa-2x display-4"></i>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class='col-lg-6'>
+                            <div class="card homeTaskCard mt-2 mb-5" style="width: 90%;">
+                                <div class="card-header" style="background-color: #29B9C2; "><h6 class="font-weight-bold text-black">Average Time Spent</h6></div>
+                                <div class="card-body text-dark justify-content-center">
+                                    <div class="align-items-center justify-content-center d-flex">
+                                        <i class="fas fa-user-clock fa-2x display-4 "></i>
+
+                                        <h5 class="text-info ms-1">@Model.AverageTimeDays <span style="color:black">days</span>, <span style="color:crimson">@Model.AverageTimeHours</span> <span style="color:black">hours</span>, <span style="color:black"> and</span> <span style="color:gold">@Model.AverageTimeMinutes</span> <span style="color:black">minutes</span> </h5>
+                                        @*<li><p class="d-flex" style="color:black">@Model.AverageTimeDays days</p></li>
+                                <li><p class="d-flex" style="color:black">@Model.AverageTimeHours hours</p></li>
+                                <li><p class="d-flex" style="color:black">@Model.AverageTimeMinutes minutes</p></li>*@
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='col-lg-6'>
+                            <div class="card homeTaskCard mt-2 mb-5" style="width: 90%; ">
+                                <div class="card-header" style="background-color: #29B9C2"><h6 class="font-weight-bold text-black">Total Time Spent</h6></div>
+                                <div class="card-body text-dark justify-content-center">
+                                    <div class="align-items-center justify-content-center d-flex">
+                                        <i class="fas fa-moon-stars fa-2x display-4"></i>
+                                        @*<h5 class="" style="color:black">@Model.TotalTimeDays days, @Model.TotalTimeHours, and @Model.TotalTimeMinutes minutes</h5>*@
+                                        <h5 class="text-info ms-1">@Model.TotalTimeDays <span style="color:black">days</span>, <span style="color:crimson">@Model.TotalTimeHours</span> <span style="color:black">hours</span>, <span style="color:black"> and</span> <span style="color:gold">@Model.TotalTimeMinutes</span> <span style="color:black">minutes</span> </h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @*<div class='col-lg-7'>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tasks</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Total Tasks</th>
+                                            <th scope="col">Completed Tasks</th>
+                                            <th scope="col">Completion Rate</th>
+                                            <th scope="col">Total Time Spent</th>
+                                            <th scope="col">Average Time Spent</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Model.TotalTasksCount</td>
+                                            <td>@Model.CompletedTasksCount</td>
+                                            <td>@Model.CompletedTasksPercentage</td>
+                                            <td>@Model.TotalTimeDays Days, @Model.TotalTimeHours Hours, and @Model.TotalTimeMinutes Minutes</td>
+                                            <td>@Model.AverageTimeDays Days, @Model.AverageTimeHours Hours, and @Model.AverageTimeMinutes Minutes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        *@
+
+                    </div>
+                }
+                else
+                {
+            <div class="row mt-2">
+                <h6>Hey, you're not logged in. That's unfortunate. Wanna see your tasks? Log in or make an account.</h6>
+
+            </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

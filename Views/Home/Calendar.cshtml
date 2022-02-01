@@ -1,0 +1,35 @@
+﻿@{ ViewData["Title"] = "Home Page"; }
+
+<div class="text-center">
+    @*<h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    <em>You do good work. Someday you might get a real job. -Chrisjen Avasarala </em>
+</div>
+
+@*<div>
+        <pancal month="10" , year="2021" />
+
+
+    </div>*@
+
+
+@*<div>
+        @Html.Partial("_Calendar");
+    </div>
+
+
+    <script type="text/javascript">
+
+        function createDiv() {
+            let div = document.createElement('pancal');
+            div.setAttribute('month', '11');
+            div.setAttribute('year', '2021');
+            document.body.appendChild(div);
+        }
+
+
+    </script>
+
+    <button onClick="createDiv()">Click me!</button>*@
+
+

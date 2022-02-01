@@ -1,0 +1,154 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PanOpticon.UserRoles
+@inject SignInManager<PanopticonUser> SignInManager
+@inject UserManager<PanopticonUser> UserManager
+@model IEnumerable<PanOpticon.Models.Task>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+ 
+
+<div class="container text-light rounded-3 bg-secondary">
+    <div class="row border-bottom">
+        <h1 class="display-1 shadow-1-strong"><i class="fas fa-calendar"></i> Your Day</h1>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-5">
+            <h1 class="display-5"><i class="fal fa-tasks me-5"></i>Tasks</h1>
+        </div>
+        <div class="col-7">
+            <h1 class="display-5"><i class="fal fa-newspaper me-5"></i>News</h1>
+        </div>
+
+
+    </div>
+    <div class="row" style="padding-left: 25px">
+        <div class="col-5">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                @if (Model != null)
+                {
+                    @foreach (var m in Model.OrderByDescending(s => s.DueDate).Take(8))
+                    {
+                        <div class="card homeTaskCard mt-2 mb-2" style="width:90%">
+                            <div class="card-header homeTaskCardHeader @m.TaskPriority.GetPriorityBadge()">
+                            <h6 class="font-weight-bold text-white">@m.TaskName</h6>
+                        </div>
+                        <div class="card-body text-dark">
+                            <div class="justify-content-left">
+                                <p>
+                                    Priority:
+                                    <span class="badge px-2 py-1 @m.TaskPriority.GetPriorityBadge()" id="priority">@m.TaskPriority.ToString()</span>
+                                </p>
+
+                            </div>
+                            <h4 class="small font-weight-bold">
+                                @m.TaskDescription
+                            </h4>
+
+                        </div>
+                    </div>
+                    }
+                }   
+            }
+            else
+            {
+                <div class="row">
+                    <h6>Hey, you're not logged in. That's unfortunate. Wanna see your tasks? Log in or make an account.</h6>
+                </div>
+            }
+        </div>
+
+        <div class="col-7" style="max-height:1000px; overflow-y:auto;">
+            <div class="container news-widget" style="">
+                <rssapp-list id="tVzBz8Xi5pot8a4S"></rssapp-list>
+                <script src="https://widget.rss.app/v1/list.js" type="text/javascript" async></script>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-5">
+            <h1 class="display-5"><i class="far fa-thunderstorm me-5"></i> Weather</h1>
+
+        </div>
+        <div class="col-7">
+            <h1 class="display-5"><i class="fal fa-football-ball me-5"></i>Sports</h1>
+        </div>
+    </div>
+    <div class="row" style="padding-left: 25px">
+        <div class="col-5">
+            <a class="weatherwidget-io" href="https://forecast7.com/en/40d71n74d01/new-york/" data-label_1="NEW YORK" data-label_2="WEATHER" data-theme="original" >NEW YORK WEATHER</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
+        </div>
+        <div class="col-7" style="max-height: 1000px; overflow-y:auto;">
+            <div class="container sports-widget" style="">
+                <rssapp-list id="7M5rngq5OToVFyEo"></rssapp-list>
+                <script src="https://widget.rss.app/v1/list.js" type="text/javascript" async></script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    @*<div class="container text-white bg-primary rounded-3" style="max-height:1200px;">
+            <div class="row border-bottom">
+                <h1>Panopticon</h1>
+            </div>
+            <div class="row border-bottom">
+                <div class="col-4">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <div class="">
+
+                            <h1 class="display-6 border-bottom">Upcoming Tasks</h1>
+                        </div>
+                        @foreach (var m in Model.OrderByDescending(s => s.StartDate).Take(5))
+                        {
+                            <div class="">
+                                <div class="homeTaskCard card shadow mb-4 rounded-3 " style="height: 15rem; ">
+                                    <div class="card-header bg-secondary py-3">
+                                        <h6 class="m-0 font-weight-bold text-white">@m.TaskName</h6>
+                                    </div>
+                                    <div class="card-body text-dark">
+                                        <h4 class="small font-weight-bold">
+                                            @m.TaskDescription
+                                        </h4>
+                                        <div class="justify-content-left">
+                                            <p>
+                                                Priority:
+                                                <span class="badge px-2 py-1 @m.TaskPriority.GetPriorityBadge()" id="priority">@m.TaskPriority.ToString()</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+
+
+                <div class="col-8">
+                    <div class="container news-widget" height="400px">
+                        <h1 class="display-6 border-bottom">News Feed</h1>
+                        <rssapp-list id="tnjUpvhxLTTBFYLu"></rssapp-list>
+                        <script src="https://widget.rss.app/v1/list.js" type="text/javascript" async></script>
+                    </div>
+
+                </div>
+            </div>
+        </div>*@
+
+
+
+
+

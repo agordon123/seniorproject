@@ -1,0 +1,86 @@
+/*!
+ * Bootstrap v5.0.1 (https://getbootstrap.com/)
+ * Copyright 2011-2021 The Bootstrap Authors
+ * Copyright 2011-2021 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+
+// scss-docs-start import-stack
+// Configuration
+@import "functions";
+
+
+
+/*
+$primary: #00ffff;
+$white: white;
+$navbar-light-color: red;
+*/
+
+
+$white: #ffffff;
+
+/*$theme-colors: ( "light": #acc4ce, "dark": #3e3c50, "primary": #1d3f92, "secondary": #ff4d66, "info": #f38949, "success": #00ac63, "warning": #e4cd00, "danger": #f51900, );
+*/
+
+$panopto-primary: #FFFFFF;
+$panopto-secondary: #6E696B;
+$panopto-bg: #CBD6E1;
+$panopto-tertiary: #29B9C2;
+$panopto-accent: #b0b0b0;
+$panopto-accent-secondary: #E3868C;
+$panopto-extra-primary: #a6faff;
+$panopto-extra-secondary: #537191;
+$panopto-primary-text: #343232;
+
+$body-bg: $panopto-bg;
+$body-color: $panopto-primary-text;
+
+$form-check-input-disabled-opacity: .5;
+$form-check-label-disabled-opacity: $form-check-input-disabled-opacity;
+//$form-check-btn-check-disabled-opacity: $btn-disabled-opacity;
+
+
+
+@import "variables";
+@import "mixins";
+@import "utilities";
+
+// Layout & components
+@import "root";
+@import "reboot";
+@import "type";
+@import "images";
+@import "containers";
+@import "grid";
+@import "tables";
+@import "forms";
+@import "buttons";
+@import "transitions";
+@import "dropdown";
+@import "button-group";
+@import "nav";
+@import "navbar";
+@import "card";
+@import "accordion";
+@import "breadcrumb";
+@import "pagination";
+@import "badge";
+@import "alert";
+@import "progress";
+@import "list-group";
+@import "close";
+@import "toasts";
+@import "modal";
+@import "tooltip";
+@import "popover";
+@import "carousel";
+@import "spinners";
+@import "offcanvas";
+
+// Helpers
+@import "helpers";
+
+// Utilities
+@import "utilities/api";
+// scss-docs-end import-stack

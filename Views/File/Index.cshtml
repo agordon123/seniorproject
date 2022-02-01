@@ -1,0 +1,16 @@
+﻿@model IEnumerable<PanOpticon.Models.FileVM>
+
+@{ ViewData["Title"] = "File Index"; }
+
+<h1>Files</h1>
+
+
+@foreach(var m in Model)
+{
+   <div>
+   
+       <a href="@Url.Action("Download","File",new {path = m.Path, name = m.Name})">@m.Name</a>
+   </div>
+
+
+}

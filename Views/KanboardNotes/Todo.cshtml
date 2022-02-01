@@ -1,0 +1,46 @@
+﻿@model IEnumerable<PanOpticon.Models.Todo>
+
+@{
+    ViewData["Title"] = "Todo";
+}
+
+<h1>Todo</h1>
+
+
+<!-- create a card for each Panopticon.Model.Todo item -->
+<!-- add each card to its own column in a a fluid bootstrap row -->
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        @foreach (var item in Model) {
+            <div class="col-md-4">
+                <div class="card mt-2 mb-2">
+                    <div class="card-body">
+                        <div class="card-header bg-primary">
+                        <h5 class="card-title">@item.Name</h5>
+                        </div>
+                       
+
+                        @foreach (var note in item.KanboardNotes) {
+                        <div class="card  mt-2 mb-2">
+                            <div class="card-header bg-light">
+                                @note.Title
+                            </div>
+                            <div class="card-body">
+                                @note.Note
+                            </div>
+                            <div class=" card-footer">
+                             <div class="ms-auto me-auto">
+                            <a asp-action="Edit" asp-route-id="@note.Id" class="btn btn-info mt-1 mb-1"><i class="far fa-edit"></i></a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@note.Id"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                        </div>
+                        </div>
+                        }
+
+                  
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

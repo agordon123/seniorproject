@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Calendar Home";
+    
+}
+
+<h1><i class="far fa-calendar-alt"></i>  Calendar</h1>
+
+<div id="mainDiv"></div>
+<script>
+
+$.ajax({
+    type: 'GET',
+    url: '@Url.Action("CalendarPartial", "Calendar", new { month=DateTime.Now.Month, year=2021})',
+    // other settings
+    dataType: 'html',
+    success: function (result) {
+        $('#mainDiv').html(result);
+
+    }
+});
+
+
+
+    $(document).on('click', '#calBtnPrev', function () {
+         var month = $("#pancalid").attr("month");
+            var month = parseInt(month);
+        var year = $("#pancalid").attr("year");
+        var year = parseInt(year);
+
+              $.ajax({
+                type: 'GET',
+                    url: '@Url.Action("CalendarPartial", "Calendar")?month=' + (month-1) + '&year='+(year),
+                // other settings
+                dataType: 'html',
+                success: function (result) {
+                    $('#mainDiv').html(result);
+                    month = month - 1;
+                }
+                });
+
+    });
+
+     $(document).on('click', '#calBtnNext', function () {
+         var month = $("#pancalid").attr("month");
+            var month = parseInt(month);
+         var year = $("#pancalid").attr("year");
+         var year = parseInt(year);
+
+              $.ajax({
+                type: 'GET',
+                    url: '@Url.Action("CalendarPartial", "Calendar")?month=' + (month+1) + '&year=' + (year),
+                // other settings
+                dataType: 'html',
+                success: function (result) {
+                    $('#mainDiv').html(result);
+                    month = month + 1;
+                }
+                });
+
+    });
+
+</script>

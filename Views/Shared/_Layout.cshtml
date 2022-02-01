@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Panopticon</title>
+
+    <link rel="stylesheet" href="~/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="~/style/bootstrap/scss/bootstrap.custom.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fal fa-paragraph"></i> Panopticon</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><i class="fal fa-home-lg"></i> Home</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Calendar" asp-action="Index"><i class="fal fa-calendar-week"></i> Calendar</a>
+                        </li>
+
+                         <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Task" asp-action="Metrics"><i class="fal fa-chart-line"></i> Metrics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="FAQ"><i class="fal fa-question-circle"></i> FAQ</a>
+                        </li>
+
+                        <li class="nav-item dropdown text-white">
+                          
+                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButtonTask" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fal fa-tasks"></i> 
+                            Tasks
+                        </button>
+                        <ul class="dropdown-menu text-white" aria-labelledby="dropdownMenuButtonTask">
+                           <li> <a class="dropdown-item" asp-controller="Task" asp-action="Index">View Tasks</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                           <li> <a class="dropdown-item"  asp-controller="Task" asp-action="Create"> Create Task</a></li>
+                        </ul>
+
+                        </li> 
+
+                        <li class="nav-item dropdown text-white">
+                          
+                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButtonNotes" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fal fa-sticky-note"></i> 
+                            To-Do
+                        </button>
+                        <ul class="dropdown-menu text-white" aria-labelledby="dropdownMenuButtonNotes">
+                             
+                              <li class="text-black"> To-Do lists</li>
+                          <li> <a class="dropdown-item" asp-controller="KanboardNotes" asp-action="Index">View</a></li>
+                           <li> <a class="dropdown-item"  asp-controller="KanboardNotes" asp-action="CreateTodo"> Create To-Do</a></li>
+
+                           <li><hr class="dropdown-divider"></li>
+                            <li class="text-black">Notes</li>
+                          
+                           <li> <a class="dropdown-item"  asp-controller="KanboardNotes" asp-action="Create"> Create Note</a></li>
+
+                            
+                        </ul>
+
+                        </li> 
+                       
+
+                         <li class="nav-item dropdown text-white">
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton22" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fal fa-file-upload"></i>
+                            Files
+                        </button>
+                        <ul class="dropdown-menu text-white" aria-labelledby="dropdownMenuButton22">
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="File" title="Files">View Files</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-action="Create" asp-controller="File" title="Files">Upload Files</a></li>
+                        </ul>
+                        </li>
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container">
+        <main role="main" class="pb-3 text-center">
+            @*<i class="fal fa-hourglass fa-10x fa-spin"></i>*@
+            <br />
+
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="container">
+            &copy; 2021 - PanOpticon - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
